@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./scripts/index-page.js" defer></script>
-</head>
-<body>
     
-</body>
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+      body
+      {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        background-attachment: fixed;
+				height: 100vh;
+      }
+			@media (max-width: 600px)
+			{
+				body
+				{
+					height: 100%;
+				}
+			}
+    </style>
+  </head>
+  <body>
+    <ul class="navbar">
+      <li style="float: left; margin-left: -10px;" class="forecast"><a class="repo-link" href="https://github.com/hazalsaygili/ida-hazal-weather-forecast-site">⛄ Forecast</a></li>
+      <li><input spellcheck="false" class="search-city" id="searchCity" type="text" autocomplete="off" placeholder="🔍︎ Search City"></li>
+    </ul>
+
+		<ul class="mobile-navbar">
+      <li><input spellcheck="false" class="mobile-search-city" id="mobileSearchCity" type="text" autocomplete="off" placeholder="Search City..."></li>
+    </ul>
+
+    <h1 class="location-name" id="locationName">Search City...</h1>
+
+    <div class="temperature-container">
+      <div class="temperature-icon"><img class="imgs-as-icons" src="icons/sunny.png"></div>
+      <div class="temperature-value" id="temperatureValue"></div>
+    </div>
+
+    <h2 class="weather-type" id="weatherType"></h2>
+
+    <div class="additionals-first-row">
+      <span class="air-quality-additional">
+        <span class="air-quality-additional-label">Air Quality Index </span>
+        <span class="air-quality-index-additional-value">Moderate</span>
+      </span>
+
+      <span class="real-feel-additional">
+        <span class="real-feel-additional-label">Real Feel </span>
+        <span class="real-feel-additional-value" id="realFeelAdditionalValue">-</span>
+      </span>
+
+      <span class="humidity-additional">
+        <span class="humidity-additional-label">Humidity </span>
+        <span class="humidity-additional-value" id="humidityAdditionalValue">-</span>     
+      </span>
+
+      <span class="max-temperature-additional">
+        <span class="max-temperature-additional-label">Highest Temperature </span>
+        <span class="max-temperature-additional-value" id="maxTemperatureAdditionalValue">-</span>
+      </span>
+
+      <span class="min-temperature-additional">
+        <span class="min-temperature-additional-label">Lowest Temperature </span>
+        <span class="min-temperature-additional-value" id="minTemperatureAdditionalValue">-</span>          
+      </span>
+    </div>
+    <div class="daily-forecast">
+      <h2 class="daily-forecast-label">Daily</h2>
+    <script src="scripts/cityforecast-page.js"></script>
+    <script src="scripts/index-page.js"></script>
+
+		<br><br><br><br><br>
+  </body>
 </html>
