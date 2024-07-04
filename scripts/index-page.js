@@ -1,17 +1,3 @@
-// const url = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={4ef30b9089e6aebb1f6c0702cbbd1b18}" ; 
-// console.log(url);
-
-// async function fetchWeather(){
-//     const response = await axios.get(url);
-//     return response;
-// }
-
-// let response = fetchweather();
-// console.log(response.data);
-// console.log(response.data.data);
-
-
-
 var cityInput = document.getElementById("searchCity");
 
 var backgroundsList = [
@@ -41,38 +27,34 @@ var randomBackground = backgroundsList[Math.floor(Math.random() * backgroundsLis
 
 document.body.style.background = "linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)) , url('media/" + randomBackground + "')";
 
-cityInput.addEventListener("keyup", function(event)
-{
-  if(event.key === "Enter")
-  {
-		loader();
-		function loader()
-		{
+cityInput.addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    loader();
 
-			document.getElementById("locationName").innerHTML = "";
-			document.getElementById("temperatureValue").innerHTML = "";
-			document.getElementById("weatherType").innerHTML = "";
+    function loader() {
+      document.getElementById("locationName").innerHTML = "";
+      document.getElementById("temperatureValue").innerHTML = "";
+      document.getElementById("weatherType").innerHTML = "";
+      document.getElementById("maxTemperatureAdditionalValue").innerHTML = ""; 
+      document.getElementById("minTemperatureAdditionalValue").innerHTML = "";
 
-			const img1 = document.createElement("img");
-			const img2 = document.createElement("img");
-			const img3 = document.createElement("img");
+      const img1 = document.createElement("img");
+      const img2 = document.createElement("img");
+      const img3 = document.createElement("img");
 
-			img1.id = "loader1";
-			img2.id = "loader2";
-			img3.id = "loader3";
 
-			img1.src = "icons/loader.gif";
-			img2.src = "icons/loader.gif";
-			img3.src = "icons/loader.gif";
+      img1.src = "icons/loader.gif";
+      img2.src = "icons/loader.gif";
+      img3.src = "icons/loader.gif";
 
-			const parentElement1 = document.getElementById("locationName");
-			const parentElement2 = document.getElementById("temperatureValue");
-			const parentElement3 = document.getElementById("weatherType");
+      const parentElement1 = document.getElementById("locationName");
+      const parentElement2 = document.getElementById("temperatureValue");
+      const parentElement3 = document.getElementById("weatherType");
 
-			parentElement1.appendChild(img1);
-			parentElement2.appendChild(img2);
-			parentElement3.appendChild(img3);
-		}
+      parentElement1.appendChild(img1);
+      parentElement2.appendChild(img2);
+      parentElement3.appendChild(img3);
+    }
 
     var cityInputValue = cityInput.value;
 
@@ -80,41 +62,39 @@ cityInput.addEventListener("keyup", function(event)
     var unit = "metric";
     var url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputValue}&appid=${apiKey}&units=${unit}`;
 
-    if(cityInputValue != "")
-    {
-      async function getWeather()
-      {
+    if (cityInputValue !== "") {
+      async function getWeather() {
         var response = await fetch(url);
         var data = await response.json();
 
-        if(data.message != "city not found" && data.cod != "404")
-        {
+        if (data.cod !== "404") {
           var location = data.name;
           var temperature = data.main.temp;
+          var weatherType = data.weather[0].description;
           var realFeel = data.main.feels_like;
           var maxTemperature = data.main.temp_max;
           var minTemperature = data.main.temp_min;
           var humidity = data.main.humidity;
         
-        
           document.getElementById("locationName").innerHTML = location;
           document.getElementById("temperatureValue").innerHTML = temperature + "<sup>o</sup>C";
+          document.getElementById("weatherType").innerHTML = weatherType;
           document.getElementById("realFeelAdditionalValue").innerHTML = realFeel + "<sup>o</sup>C";
-          document.getElementById("visibilityAdditionalValue").innerHTML = visibility + " km";
           document.getElementById("maxTemperatureAdditionalValue").innerHTML = maxTemperature + "<sup>o</sup>C";
           document.getElementById("minTemperatureAdditionalValue").innerHTML = minTemperature + "<sup>o</sup>C";
           document.getElementById("humidityAdditionalValue").innerHTML = humidity;
+        } else {
+          document.getElementById("locationName").innerHTML = "City Not Found";
+          document.getElementById("temperatureValue").innerHTML = "";
+          document.getElementById("weatherType").innerHTML = "";
+          document.getElementById("realFeelAdditionalValue").innerHTML = "";
+          document.getElementById("maxTemperatureAdditionalValue").innerHTML = "";
+          document.getElementById("minTemperatureAdditionalValue").innerHTML = "";
+          document.getElementById("humidityAdditionalValue").innerHTML = "";
         }
-        else
-				{
-					document.getElementById("locationName").innerHTML = "City Not Found";
-					document.getElementById("temperatureValue").innerHTML = "";
-					document.getElementById("weatherType").innerHTML = "";
-				}
       }
 
       getWeather();
     }
-    else document.getElementById("locationName").innerHTML = "Enter a city name...";
   }
 });
