@@ -58,7 +58,7 @@ cityInput.addEventListener("keyup", function(event) {
 
     var cityInputValue = cityInput.value;
 
-    var apiKey = "4ef30b9089e6aebb1f6c0702cbbd1b18";
+    var apiKey = "95222f06a3b7deb5cc932f302a540cc3";
     var unit = "metric";
     var url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputValue}&appid=${apiKey}&units=${unit}`;
 
@@ -92,6 +92,8 @@ cityInput.addEventListener("keyup", function(event) {
           document.getElementById("minTemperatureAdditionalValue").innerHTML = "";
           document.getElementById("humidityAdditionalValue").innerHTML = "";
         }
+
+        console.log(data)
       }
 
       getWeather();
